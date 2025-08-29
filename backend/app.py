@@ -13,8 +13,7 @@ app = Flask(__name__)
 
 CORS(app, origins=["http://localhost:5173"], supports_credentials=True)
 
-# Replace with your actual MySQL database credentials
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Vidhulinux@localhost/resume'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Vidhulinux@mysql:3306/resume'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024 
 
