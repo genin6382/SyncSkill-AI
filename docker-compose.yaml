@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  frontend:
+    container_name: react-container
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+  backend:
+    container_name: flask-container
+    build: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MYSQL_HOST=mysql-container
+    depends_on:
+      - db
+    volumes:
+      - chroma_data:/app/chroma_db
+  db:
+    image: mysql:8.0
+    container_name: mysql-container
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
+  chroma_data:
+    
